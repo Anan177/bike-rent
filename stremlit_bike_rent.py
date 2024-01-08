@@ -160,7 +160,6 @@ if opsi== 'Summary For All Season':
 
     fig, ax = plt.subplots(figsize=(35, 17))
 
-    sns.set(style='darkgrid')
     ax = sns.scatterplot(data=X, 
                 x="feeling temperature", 
                 y="rent_count", 
@@ -214,8 +213,6 @@ elif opsi== 'Work Day vs Weekend and Holiday':
     work_day_df = seasonal_df.drop(index=0, level=1).reset_index()
     no_work_day_df = seasonal_df.drop(index=1, level=1).reset_index()
 
-    sns.set(style="darkgrid")
-
     xs = ["Springer", "Springer", "Summer", "Summer", "Fall", "Fall", "Winter", "Winter"]
     hue = ["Casual_Users", "Registered_Users"] * 4
 
@@ -232,30 +229,27 @@ elif opsi== 'Work Day vs Weekend and Holiday':
     ys_2 = casual_registered_num(no_work_day_df)
 
     st.subheader('Workdays vs. Holidays and Weekends')
-    fig, ax = plt.subplots(nrows=1, ncols=2, figsize=(35, 17))
-    sns.barplot(x=xs, y=ys_1, hue=hue, ax=ax[0])
-    ax[0].set_ylabel(None)
-    ax[0].set_xlabel(None)
-    ax[0].set_title("Work Day", loc="center", fontsize=50)
-    ax[0].tick_params(axis ='y', labelsize=35)
-    ax[0].tick_params(axis ='x', labelsize=30)
-    ax[0].ticklabel_format(style='plain', axis='y')
-    ax[0].set_ylim(0, 700000)
-    ax[0].legend(loc='upper left',fontsize='30',)
+    fig, ax = plt.subplots(nrows=2, ncols=2, figsize=(35, 34))
+    sns.barplot(x=xs, y=ys_1, hue=hue, ax=ax[0,0])
+    ax[0,0].set_ylabel(None)
+    ax[0,0].set_xlabel(None)
+    ax[0,0].set_title("Work Day", loc="center", fontsize=50)
+    ax[0,0].tick_params(axis ='y', labelsize=35)
+    ax[0,0].tick_params(axis ='x', labelsize=30)
+    ax[0,0].ticklabel_format(style='plain', axis='y')
+    ax[0,0].set_ylim(0, 700000)
+    ax[0,0].legend(loc='upper left',fontsize='30',)
 
-    sns.barplot(x=xs, y=ys_2, hue=hue, ax=ax[1])
-    ax[1].set_ylabel(None)
-    ax[1].set_xlabel(None)
-    ax[1].set_title("Weekend and Holiday", loc="center", fontsize=50)
-    ax[1].tick_params(axis ='y', labelsize=35)
-    ax[1].tick_params(axis ='x', labelsize=30)
-    ax[1].ticklabel_format(style='plain', axis='y')
-    ax[1].set_ylim(0, 700000)
-    ax[1].legend(loc='upper left',fontsize='30',)
+    sns.barplot(x=xs, y=ys_2, hue=hue, ax=ax[0,1])
+    ax[0,1].set_ylabel(None)
+    ax[0,1].set_xlabel(None)
+    ax[0,1].set_title("Weekend and Holiday", loc="center", fontsize=50)
+    ax[0,1].tick_params(axis ='y', labelsize=35)
+    ax[0,1].tick_params(axis ='x', labelsize=30)
+    ax[0,1].ticklabel_format(style='plain', axis='y')
+    ax[0,1].set_ylim(0, 700000)
+    ax[0,1].legend(loc='upper left',fontsize='30',)
 
-    st.pyplot(fig)
-
-    fig, ax = plt.subplots(nrows=1, ncols=2, figsize=(35, 17))
     category = ("Casual_Users", "Registered_Users")
 
     total_casual_no_work = no_work_day_df.Casual_Users.sum()
@@ -266,13 +260,13 @@ elif opsi== 'Work Day vs Weekend and Holiday':
     total_registered_work = work_day_df.Registered_Users.sum()
     jumlah_work = (total_casual_work, total_registered_work)
 
-   
-    ax[0].pie(jumlah_work, labels=category, autopct='%1.1f%%', startangle=90, textprops={'fontsize': 35})
-    ax[0].set_title(" ", loc="center", fontsize=50)
-    ax[0].axis('equal')
 
-    ax[1].pie(jumlah_no_work, labels=category, autopct='%1.1f%%', startangle=90, textprops={'fontsize': 35})
-    ax[1].set_title(" ", loc="center", fontsize=50)
-    ax[1].axis('equal')
+    ax[1,0].pie(jumlah_work, labels=category, autopct='%1.1f%%', startangle=90, textprops={'fontsize': 35})
+    ax[1,0].set_title(" ", loc="center", fontsize=50)
+    ax[1,0].axis('equal')
+
+    ax[1,1].pie(jumlah_no_work, labels=category, autopct='%1.1f%%', startangle=90, textprops={'fontsize': 35})
+    ax[1,1].set_title(" ", loc="center", fontsize=50)
+    ax[1,1].axis('equal')
 
     st.pyplot(fig)
