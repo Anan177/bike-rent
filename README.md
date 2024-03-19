@@ -17,8 +17,7 @@ streamlit run stremlit_bike_rent.py
 or
 python -m streamlit run stremlit_bike_rent.py
 ```
-## tautan untuk steamlit app
+## Tautan untuk steamlit app
 https://bike-rent-analysis-ipf2bmgymrjgwmnupgatra.streamlit.app/
 
 ![Alt text](image.png)
-![Alt text](image-1.png)
